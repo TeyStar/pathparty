@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="wsir">
+<head>
+	<title>What Should I Roll?</title>
+	<link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+	<link rel="stylesheet" type="text/css" href="css/app.css">
+</head>
+<body ng-controller="MainCtrl">
+    <p>
+        'What Should I Roll?' is a website designed by <a>TeyStar</a> to quickly 
+        give you a class for your next character, built around what the current 
+        party already contains and the campaign setting.
+    </p>
+    
+    <p>My Party Contains:</p>
+    <ul  ng-repeat="partyMember in party track by $index">
+         <li>
+             {{partyMember.name}}
+         </li>
+    </ul>
+    <div class="ui submit button">This Is My Current Party</div>
+    
+    <form class="ui form" ng-submit="createPartyMember(newPartyMember)">
+        <div class="field">
+            <select ng-model="newPartyMember.id">
+                <option value="">Choose A Class</option>
+                <option value="0">Fighter</option>
+                <option value="1">Cleric</option>
+                <option value="2">Rogue</option>
+                <option value="3">Wizard</option>
+            </select>
+            <button class="ui submit button">Submit</button>
+        </div>
+    </form>
+    
+    
+    <p id="disclaimer">
+        'What Should I Roll?' is not 100% accurate but will almost always give
+        a good class suggestion.  Its accuracy diminishes when players use 3rd
+        party materials or class archtypes.  Think about these variables and try
+        to find an archtype within the suggested class for best results in these
+        circumstances.  Always try to make something that will be fun to play!
+    </p>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
