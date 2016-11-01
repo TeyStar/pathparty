@@ -148,7 +148,7 @@ angular.module('wsir', [
             
         }
         
-        //Check for weak spots in the party that can use reinforcement.
+        //Check for weak spots in the party that can use reinforcement 
     }
     
     $scope.createPartyMember = createPartyMember;

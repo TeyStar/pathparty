@@ -1,0 +1,30 @@
+body{
+    background-color: #247BA0;
+    color: #FF1654;
+}
+
+html, body, h1, h2, h3, h4, h5, p, .ui { 
+    font-family: 'Julius Sans One', sans-serif !important; 
+}
+
+#pmcselector{
+    background-color: #70C1B3 !important;
+}
+#results{
+    background-color: #B2DBBF !important;
+}
+#partylist{
+    background-color: #F3FFBD !important;
+}
+
+.ui.icon.header{
+    display: block;
+}
+
+.ui.header, .ui.header .sub.header{
+    color:white;
+}
+
+#disclaimer{
+    color: white;
+}
