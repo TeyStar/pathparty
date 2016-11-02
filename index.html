@@ -21,14 +21,43 @@
         <div class="three column row">
             <div class="column" id="pmcselector">
                 <h3>Party Member Class Selector:</h3>
-                <form class="ui form" ng-submit="createPartyMember(newPartyMember)">
+                <form class="ui form" ng-submit="createPartyMember(playerClassId, playerClasses, party)">
                     <div class="field">
-                        <select ng-model="newPartyMember.id">
+                        <select ng-model="playerClassId">
                             <option value="">Choose A Class</option>
+                            <option value="">**CORE CLASSES**</option>
                             <option value="0">Fighter</option>
                             <option value="1">Cleric</option>
                             <option value="2">Rogue</option>
                             <option value="3">Wizard</option>
+                            <option value="4">Barbarian</option>
+                            <option value="5">Bard</option>
+                            <option value="6">Druid</option>
+                            <option value="7">Monk</option>
+                            <option value="8">Paladin</option>
+                            <option value="9">Ranger</option>
+                            <option value="10">Sorcerer</option>
+                            <option value="">**BASE CLASSES**</option>
+                            <option value="11">Alchemist</option>
+                            <option value="12">Cavalier</option>
+                            <option value="13">Gunslinger</option>
+                            <option value="14">Inquisitor</option>
+                            <option value="15">Magus</option>
+                            <option value="16">Oracle</option>
+                            <option value="17">Summoner</option>
+                            <option value="18">Vagilante</option>
+                            <option value="19">Witch</option>
+                            <option value="">**HYBRID CLASSES**</option>
+                            <option value="20">Arcanist</option>
+                            <option value="21">Bloodrager</option>
+                            <option value="22">Brawler</option>
+                            <option value="23">Hunter</option>
+                            <option value="24">Investigator</option>
+                            <option value="25">Shaman</option>
+                            <option value="26">Skald</option>
+                            <option value="27">Slayer</option>
+                            <option value="28">Swashbuckler</option>
+                            <option value="29">Warpriest</option>
                         </select>
                         <button class="ui submit button">Submit</button>
                     </div>
