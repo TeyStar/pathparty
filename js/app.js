@@ -66,7 +66,35 @@ angular.module('wsir', [
         skills: 0, face: 0, arcane: 2, divine: 0},
         
         //*****HYBRIDCLASSES*****//*****HYBRIDCLASSES*****//*****HYBRIDCLASSES*****
+        {id: 20, name: 'Arcanist', frontline: 0, fortitude: 0, reflex: 0, will: 1,
+        skills: 0, face: 1, arcane: 2, divine: 0},
         
+        {id: 21, name: 'Bloodrager', frontline: 1, fortitude: 1, reflex: 0, will: 0,
+        skills: 0, face: 0, arcane: 1, divine: 0},
+        
+        {id: 22, name: 'Brawler', frontline: 1, fortitude: 1, reflex: 1, will: 0,
+        skills: 0, face: 0, arcane: 0, divine: 0},
+        
+        {id: 23, name: 'Hunter', frontline: 1, fortitude: 1, reflex: 1, will: 0,
+        skills: 1, face: 0, arcane: 0, divine: 1},
+        
+        {id: 24, name: 'Investigator', frontline: 0, fortitude: 0, reflex: 1, will: 1,
+        skills: 2, face: 2, arcane: 1, divine: 1},
+        
+        {id: 25, name: 'Shaman', frontline: 1, fortitude: 0, reflex: 0, will: 1,
+        skills: 0, face: 1, arcane: 1, divine: 1},
+        
+        {id: 26, name: 'Skald', frontline: 1, fortitude: 1, reflex: 0, will: 1,
+        skills: 0, face: 1, arcane: 1, divine: 1},
+        
+        {id: 27, name: 'Slayer', frontline: 1, fortitude: 1, reflex: 1, will: 0,
+        skills: 1, face: 0, arcane: 0, divine: 0},
+        
+        {id: 28, name: 'Swashbuckler', frontline: 1, fortitude: 0, reflex: 1, will: 0,
+        skills: 0, face: 1, arcane: 0, divine: 0},
+        
+        {id: 29, name: 'Warpriest', frontline: 1, fortitude: 1, reflex: 0, will: 1,
+        skills: 0, face: 1, arcane: 0, divine: 1}
     ];
     
     $scope.party = [];
@@ -136,10 +164,52 @@ angular.module('wsir', [
         currentNeeds.shift();  //Remove the id from the array.
         
         //Check for huge holes in the party first in order of severity.
-        if (totalStats.frontline == 0){
-            
-        }
+        var suggestedClass;
+        var suggestedReason;
         
+        if (totalStats.frontline == 0){ //Frontline Checking
+            if (currentNeeds.frontline >= 2){  //Desperately NEEDS!
+                suggestedClass = "Fighter";
+                suggestedReason = "The party desperately needs someone in the frontline " +
+                "and fighter's access to heavy armor training and polearms makes them a great choice!";
+                if (totalStats.fortitude < currentNeeds.fortitude){
+                    suggestedReason += "\n\nYour party also needs more characters with good fortitude, which Fighter also provides.";
+                }
+            }
+            else if (totalStats.divine < currentNeeds.divine && totalStats.skills < currentNeeds.skills){
+                suggestedClass = "Hunter";
+                suggestedReason = "The party needs a frontliner and the Hunter's medium armor " +
+                "and animal focus makes them decent frontliners... BUT then you include their pet fighting " +
+                "by their side and that makes them GREAT frontliners!";
+                suggestedReason += "\n\nThe party can use some divine casting, Hunter's bring the Druid spell list " +
+                "up to level 6 and this includes the cure wounds line of spells!";
+                suggestedReason += "\n\nThe party can also use a skill monkey and Hunter's bring Perception, " +
+                "Stealth, Spellcraft, can Track, and  other outdoorsy skills to the table.";
+                if (totalStats.fortitude < currentNeeds.fortitude){
+                    suggestedReason += "\n\nYour party also needs more characters with good fortitude, which Hunter also provides.";
+                }
+                if (totalStats.reflex < currentNeeds.reflex){
+                    suggestedReason += "\n\nYour party also needs more characters with good reflex, which Hunter also provides.";
+                }
+            }
+            else if (totalStats.divine < currentNeeds.divine && totalStats.face < currentNeeds.face){
+                suggestedClass = "Warpriest";
+                suggestedReason = "The party needs a frontliner and the Warpriest clad in heavy armor " +
+                "blessed with extra enhancement bonus to it from Sacred Armor, add in a Blessing " +
+                "that summons a battle companion and you have a fantastic frontliner!";
+                suggestedReason += "\n\nThe party can use some divine casting, Warpriest's bring the Cleric spell list " +
+                "up to level 6 and even can channel energy to heal!";
+                suggestedReason += "\n\nThe party can also use a face and Warpriest's have Diplomacy, " +
+                "Intimidate, Sense Motive, and even Handle Animal to help win the battles of words!  Roleplay " +
+                "as a worshipper of a Lawful Good diety for bonus leader points from your Dungeon Master!";
+                if (totalStats.fortitude < currentNeeds.fortitude){
+                    suggestedReason += "\n\nYour party also needs more characters with good fortitude, which Warpriest also provides.";
+                }
+                if (totalStats.will < currentNeeds.will){
+                    suggestedReason += "\n\nYour party also needs more characters with good will, which Warpriest also provides.";
+                }
+            }
+        }
         //Check for weak spots in the party that can use reinforcement 
     }
     
