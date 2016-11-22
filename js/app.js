@@ -137,13 +137,13 @@ angular.module('wsir', [
     
     function giveSuggestion(totalStats, party){
         var needsMap = [
-            {id: 6, frontline: 3, fortitude: 3, reflex: 3, will: 3,
+            {frontline: 3, fortitude: 3, reflex: 3, will: 3,
             skills: 2, face: 2, arcane: 3, divine: 3},
-            {id: 4, frontline: 2, fortitude: 2, reflex: 2, will: 2,
+            {frontline: 2, fortitude: 2, reflex: 2, will: 2,
             skills: 2, face: 2, arcane: 2, divine: 2},
-            {id: 3, frontline: 1, fortitude: 2, reflex: 2, will: 2,
+            {frontline: 1, fortitude: 2, reflex: 2, will: 2,
             skills: 1, face: 1, arcane: 1, divine: 1},
-            {id: 0, frontline: 1, fortitude: 1, reflex: 1, will: 1,
+            {frontline: 1, fortitude: 1, reflex: 1, will: 1,
             skills: 1, face: 1, arcane: 1, divine: 1}
         ];
     
@@ -151,18 +151,18 @@ angular.module('wsir', [
         //DISCOVERING WHAT IS NEEDED FOR SUGGESTION
         //DISCOVERING WHAT IS NEEDED FOR SUGGESTION
         
-        var currentNeeds = needsMap.id[6];
+        var currentNeeds = needsMap[0];
         
         if (party.length <= 5){
-            currentNeeds = needsMap.id[4];
+            currentNeeds = needsMap[1];
         }
         else if (party.length == 3){
-            currentNeeds = needsMap.id[3];
+            currentNeeds = needsMap[2];
         }
         else if (party.length < 3){
-            currentNeeds = needsMap.id[0];
+            currentNeeds = needsMap[3];
         }
-        currentNeeds.shift();  //Remove the id from the array.
+        //currentNeeds.prototype.shift();  //Remove the id from the array.
         
         //Check for huge holes in the party first in order of severity.
         var suggestedClass;
