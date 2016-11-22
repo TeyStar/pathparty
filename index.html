@@ -28,19 +28,19 @@
                             <optgroup label="CORE CLASSES">
                                 <option value="0">Fighter</option>
                                 <option value="1">Cleric</option>
-                                <option value="2">Rogue</option>
+                                <option value="2">Rogue/Ninja</option>
                                 <option value="3">Wizard</option>
                                 <option value="4">Barbarian</option>
                                 <option value="5">Bard</option>
                                 <option value="6">Druid</option>
                                 <option value="7">Monk</option>
-                                <option value="8">Paladin</option>
+                                <option value="8">Paladin/Antipaladin</option>
                                 <option value="9">Ranger</option>
                                 <option value="10">Sorcerer</option>
                             </optgroup>
                             <optgroup label="BASE CLASSES">
                                 <option value="11">Alchemist</option>
-                                <option value="12">Cavalier</option>
+                                <option value="12">Cavalier/Samurai</option>
                                 <option value="13">Gunslinger</option>
                                 <option value="14">Inquisitor</option>
                                 <option value="15">Magus</option>
@@ -69,8 +69,9 @@
             
             <div class="column" id="results">
                 <h3>You Should Roll:</h3>
-                
+                <p>{{suggest.classSuggest}}</p>
                 <h4>...and here's why:</h4>
+                <p>{{suggest.reasonSuggest}}</p>
             </div>
             
             <div class="column" id="partylist">
@@ -88,11 +89,12 @@
     <p id="disclaimer">
         'What Should I Roll?' is not 100% accurate but will almost always give
         a good class suggestion.  Its accuracy diminishes when players use 3rd
-        party materials or class archtypes.  Think about these variables and try
-        to find an archtype within the suggested class for best results in these
+        party materials or class archetypes.  Think about these variables and try
+        to find an archetype within the suggested class for best results in these
         circumstances.  Always try to make something that will be fun to play!
     </p>
     
+    <script src="lodash/lodash.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="js/app.js"></script>
 </body>

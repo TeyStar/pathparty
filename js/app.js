@@ -11,7 +11,7 @@ angular.module('wsir', [
         skills: 0, face: 1, arcane: 0, divine: 2},
         
         {id: 2, name: 'Rogue', frontline: 0, fortitude: 0, reflex: 1, will: 0,
-        skills: 2, face: 1, arcane: 0, divine: 0},
+        skills: 2, face: 2, arcane: 0, divine: 0},
         
         {id: 3, name: 'Wizard', frontline: 0, fortitude: 0, reflex: 0, will: 1,
         skills: 0, face: 1, arcane: 2, divine: 0},
@@ -39,16 +39,16 @@ angular.module('wsir', [
         
         //*****BASECLASSES*****//*****BASECLASSES*****//*****BASECLASSES*****
         {id: 11, name: 'Alchemist', frontline: 0, fortitude: 1, reflex: 1, will: 0,
-        skills: 0, face: 0, arcane: 1, divine: 1},
+        skills: 1, face: 0, arcane: 1, divine: 1},
         
         {id: 12, name: 'Cavalier', frontline: 1, fortitude: 1, reflex: 0, will: 0,
-        skills: 0, face: 1, arcane: 0, divine: 0},
+        skills: 0, face: 2, arcane: 0, divine: 0},
         
         {id: 13, name: 'Gunslinger', frontline: 1, fortitude: 1, reflex: 1, will: 0,
         skills: 1, face: 0, arcane: 0, divine: 0},
         
         {id: 14, name: 'Inquisitor', frontline: 1, fortitude: 1, reflex: 0, will: 1,
-        skills: 1, face: 1, arcane: 0, divine: 1},
+        skills: 1, face: 2, arcane: 0, divine: 1},
         
         {id: 15, name: 'Magus', frontline: 1, fortitude: 1, reflex: 0, will: 1,
         skills: 0, face: 0, arcane: 1, divine: 0},
@@ -85,13 +85,13 @@ angular.module('wsir', [
         skills: 0, face: 1, arcane: 1, divine: 1},
         
         {id: 26, name: 'Skald', frontline: 1, fortitude: 1, reflex: 0, will: 1,
-        skills: 0, face: 1, arcane: 1, divine: 0},
+        skills: 0, face: 2, arcane: 1, divine: 0},
         
         {id: 27, name: 'Slayer', frontline: 1, fortitude: 1, reflex: 1, will: 0,
         skills: 1, face: 0, arcane: 0, divine: 0},
         
         {id: 28, name: 'Swashbuckler', frontline: 1, fortitude: 0, reflex: 1, will: 0,
-        skills: 0, face: 1, arcane: 0, divine: 0},
+        skills: 0, face: 2, arcane: 0, divine: 0},
         
         {id: 29, name: 'Warpriest', frontline: 1, fortitude: 1, reflex: 0, will: 1,
         skills: 0, face: 1, arcane: 0, divine: 1}
@@ -99,13 +99,13 @@ angular.module('wsir', [
     
     $scope.party = [];
     
-    
+    $scope.suggest = [{classSuggest: '', reasonSuggest: ''}];
     
     //#################
     //#Party Creation#
     //#################
     
-    function createPartyMember(playerClassId, playerClasses, party) {
+    function createPartyMember(playerClassId, playerClasses, party, suggest) {
         var playerClass = [];
         if (playerClassId != ""){
             playerClass = playerClasses[playerClassId];
@@ -113,7 +113,7 @@ angular.module('wsir', [
             party.push(playerClass);
         }
         
-        giveSuggestion(findPartyStats(party), party);
+        return giveSuggestion(findPartyStats(party), party);
         
     }
     
@@ -137,13 +137,13 @@ angular.module('wsir', [
     
     function giveSuggestion(totalStats, party){
         var needsMap = [
-            {id: 6, frontline: 3, fortitude: 3, reflex: 3, will: 3,
+            {frontline: 3, fortitude: 3, reflex: 3, will: 3,
             skills: 2, face: 2, arcane: 3, divine: 3},
-            {id: 4, frontline: 2, fortitude: 2, reflex: 2, will: 2,
+            {frontline: 2, fortitude: 2, reflex: 2, will: 2,
             skills: 2, face: 2, arcane: 2, divine: 2},
-            {id: 3, frontline: 1, fortitude: 2, reflex: 2, will: 2,
+            {frontline: 1, fortitude: 2, reflex: 2, will: 2,
             skills: 1, face: 1, arcane: 1, divine: 1},
-            {id: 0, frontline: 1, fortitude: 1, reflex: 1, will: 1,
+            {frontline: 1, fortitude: 1, reflex: 1, will: 1,
             skills: 1, face: 1, arcane: 1, divine: 1}
         ];
     
@@ -151,18 +151,18 @@ angular.module('wsir', [
         //DISCOVERING WHAT IS NEEDED FOR SUGGESTION
         //DISCOVERING WHAT IS NEEDED FOR SUGGESTION
         
-        var currentNeeds = needsMap.id[6];
+        var currentNeeds = needsMap[0];
         
         if (party.length <= 5){
-            currentNeeds = needsMap.id[4];
+            currentNeeds = needsMap[1];
         }
         else if (party.length == 3){
-            currentNeeds = needsMap.id[3];
+            currentNeeds = needsMap[2];
         }
         else if (party.length < 3){
-            currentNeeds = needsMap.id[0];
+            currentNeeds = needsMap[3];
         }
-        currentNeeds.shift();  //Remove the id from the array.
+        //currentNeeds.prototype.shift();  //Remove the id from the array.
         
         //Check for huge holes in the party first in order of severity.
         var suggestedClass;
@@ -172,7 +172,7 @@ angular.module('wsir', [
             if (currentNeeds.frontline >= 2){  //Desperately NEEDS!
                 suggestedClass = "Fighter";
                 suggestedReason = "The party desperately needs someone in the frontline " +
-                "and fighter's access to heavy armor training and polearms for long ranged attacks of opportunity makes them a great choice!";
+                "and Fighter's access to heavy armor training, which gives their DEX bonus while wearing heavy armor, and polearms for long ranged attacks of opportunity makes them a great choice!  Pick up the Combat Reflexes feat to get multiple attacks of opportunities with your reach weapons to punish anyone trying to get by you and attempt to attack your party's soft and squishy mages!";
                 if (totalStats.fortitude < currentNeeds.fortitude){
                     suggestedReason += "\n\nYour party also needs more characters with good fortitude, which Fighter also provides.";
                 }
@@ -235,7 +235,8 @@ angular.module('wsir', [
                     "you'd select as they wear light armor and suffer from arcane failure in anything heavier, but " +
                     "their Eidolon and Summon Monster Spell Like Abilities allow for them to create a tremendously effective " +
                     "frontline!  Build your Eidolon to have as many attacks of opprotunity as possible and give him long reach " +
-                    "with solid tripping ability and nothing will be able to safely move around your summons without being tripped and severely punished!";
+                    "with solid tripping ability and nothing will be able to safely move around your summons without being tripped and severely punished!  " +
+                    "Pick up some traits that will give you Bluff and Diplomacy and you're set to be a makeshift party face since your casting stat is Charisma after all.  You also get every Knowledge check and Linguistics, learn about the cultures, current events, and the languages of the area before you start talking and you should be fine as the party leader.";
                     suggestedReason += "\n\nThe party can use some arcane casting, Summoners bring at least up to level 6 arcane casting!";
                     if (totalStats.will < currentNeeds.will){
                         suggestedReason += "\n\nYour party also needs more characters with good will, which Summoners provide.";
@@ -312,7 +313,7 @@ angular.module('wsir', [
                     "while guns make you think 'far ranged' but most guns to be effective have to be within 20-30ft. " +
                     "With a d10 Hit Die, medium armor, deeds to grant bonus AC, Nimble granting dodge bonus, you're a better frontline than most give credit for!  " +
                     "Pick up the Gun Tank archetype and you can run around in heavy armor while holding a tower shield to make you even more of a beefy frontliner.  " +
-                    "Charisma gains you more grit for Deeds, on another plus side is it can make you a great social face for the party with your Bluff, Handle Animal, Intimidate, Knowledge Local, and Diplomacy if you make one of your starting traits give it to you as a class skill."
+                    "Charisma gains you more grit for Deeds, on another plus side is that it can make you a great social face for the party with your Bluff, Handle Animal, Intimidate, Knowledge Local, and Diplomacy if you make one of your starting traits give it to you as a class skill.";
                 }
             }
             
@@ -643,6 +644,176 @@ angular.module('wsir', [
         }
         
         //Check for weak spots in the party that can use reinforcement 
+        else if (totalStats.frontline < currentNeeds.frontline){
+            //Defender Check
+            if (_.includes(party, 'Fighter') || _.includes(party, 'Paladin') || _.includes(party, 'Cavalier')){
+                //Strikers
+                suggestedReason = "Your party contains a Defender who has both heavy armor and a d10 Hit Die but can use a side-tank Striker to help them.  \n\n";
+                //Arcane
+                if (totalStats.arcane < currentNeeds.arcane){
+                    suggestedClass = "Magus";
+                    suggestedReason += "You can use some more arcane magic.  \n\nMagus brings very high damage output with Spell Combat and Spellstrike in the frontlines and you carry a spellbook like a Wizard, meaning you can learn every possible spell to your class as long as you get a shot at writing it down in your book!  So even outside of combat you still have plenty of uses solving problems with your magic.";
+                }
+                //Divine
+                else if (totalStats.divine < currentNeeds.divine){
+                    suggestedReason += "You can use some more divine magic.  \n\n";
+                    if (_.includes(party, 'Cleric')){
+                        suggestedClass = "Hunter";
+                        suggestedReason += "Since your party already has a Cleric, a Hunter would be a good fit bringing the Druid spellbook.   The Hunter's medium armor " +
+                        "and animal focus makes them decent frontliners... BUT then you include their pet fighting " +
+                        "by their side and that makes them GREAT frontliners!";
+                    }
+                    else{
+                        suggestedClass = "Warpriest";
+                        suggestedReason += "Since your party is lacking a Cleric within its divine casting abilities, a Warpriest would be a good fit bringing the Cleric spellbook.  The Warpriest clad in heavy armor " +
+                        "blessed with extra enhancement bonus to it from Sacred Armor, add in a Blessing " +
+                        "that summons a battle companion and you have a fantastic frontliner!";
+                    }
+                }
+                //Skills
+                else if (totalStats.skills < currentNeeds.skills){
+                    suggestedReason += "Your party needs access to more skills.  \n\n";
+                    if(_.includes(party, 'Alchemist')){
+                        suggestedClass = "Ranger";//Ranger
+                        suggestedReason += "As a Ranger, you can do very well in the frontline, bring a tanky pet out there with you and since the party already has someone with Disable Device, you can help the party with Perception, Stealth, Tracking, and several Knowledge checks!  All in one package!";
+                    }
+                    else{
+                        suggestedClass = "Alchemist as Beastmorph archetype";//Beastmorph
+                        suggestedReason += "The Beastmorph archetype takes the Alchemist Mutagens to the next level!  When you create a Mutagen, not only do you get the usual selected buff but you also recieve animalistic features of an animal-like humanoid.  Which means you gain the natural attacks, movement, senses, and natural armor of that creature.  On top of that you can also choose an additional ability (or two depending on the level) from the polymorphing spell described for your current level of Mutagen.  So what does that mean?  You can build a beefcake melee Alchemist who eventually will be able to pounce (amazing!), fly (also amazing!) trip, poison, grab, and have darkvision!  Tons of options to play around with and all of them can be changed from Mutagen to Mutagen, you're never stuck!  You also bring in the Disable Device that your party needs to deal with traps.";
+                    }
+                }
+                //Face
+                else if (totalStats.face < currentNeeds.face){
+                    suggestedReason += "Your party need more options in social situations.  \n\n";
+                    if (_.includes(party, 'Summoner')){
+                        suggestedClass = "Gunslinger";//Gunslinger
+                        suggestedReason += "You have a Summoner in your party that can grab every knowledge and even linguistics, so you need to pick up the rest of the slack in social skills.  " +
+                        "Take a trait to make Diplomacy a class skill and Gunslinger can make for a solid choice because " +
+                        "while guns make you think 'far ranged' but most guns to be effective have to be within 20-30ft. " +
+                        "With a d10 Hit Die, medium armor, deeds to grant bonus AC, Nimble granting dodge bonus, you're a better frontline than most give credit for!  " +
+                        "Pick up the Gun Tank archetype and you can run around in heavy armor while holding a tower shield to make you even more of a beefy frontliner.  " +
+                        "Charisma gains you more grit for Deeds, on another plus side is that it can make you a great social face for the party with your Bluff, Handle Animal, Intimidate, Knowledge Local, and Diplomacy if you make one of your starting traits give it to you as a class skill.";
+                    }
+                    else {
+                        suggestedClass = "Summoner";//Summoner 
+                        suggestedReason += "A Summoner may seem like the last option " +
+                        "you'd select as they wear light armor and suffer from arcane failure in anything heavier, but " +
+                        "their Eidolon and Summon Monster Spell Like Abilities allow for them to create a tremendously effective " +
+                        "frontline!  Build your Eidolon to have as many attacks of opprotunity as possible and give him long reach " +
+                        "with solid tripping ability and nothing will be able to safely move around your summons without being tripped and severely punished!  " +
+                        "Pick up some traits that will give you Bluff and Diplomacy and you're set to be a makeshift party face since your casting stat is Charisma after all.  You also get every Knowledge check and Linguistics, learn about the cultures, current events, and the languages of the area before you start talking and you should be fine as the party leader.";
+                    }
+                }
+            }
+            else{
+                //Defenders
+                suggestedReason = "Your party can use a Defender in the frontline.  At least someone with a d10 Hit Die and Heavy Armor.  ";
+                if (totalStats.divine < currentNeeds.divine){
+                    suggestedClass = "Paladin";//Pally
+                    suggestedReason += "A Paladin becomes immune to many status effects, " +
+                    "add their Charisma on top of their saves to make them more resistant to the effects they aren't immune to, " +
+                    "while wearing heavy armor and sporting a d10 hit die!  They're a great frontliner!  " +
+                    "Paladins brings only a small repertoire of spells but they also carry channel energy and lay on hands for many healing options!  They're also the kings of removing status effects!  Your party is a lacking in the Divine Casting area so it will really help out there as well.";
+                }
+                else if (totalStats.face < currentNeeds.face){
+                    suggestedClass = "Cavalier";//Cav
+                    suggestedReason += "Rushing to the frontline on your steed, full of fortitude, forcing enemies to fight you through challenges, " +
+                    "buffing, and granting teamwork feats to your allies, Cavalier makes a great frontliner!" +
+                    "With your Bluff, Diplomacy, Intimidate, Handle Animal, and Sense Motive skills, you can carry yourself elegantly as your party's leader!";
+                }
+                else{
+                    suggestedClass = "Fighter";//Fighter
+                    suggestedReason += "Fighter's access to heavy armor training, which gives their DEX bonus while wearing heavy armor, and polearms for long ranged attacks of opportunity makes them a great choice!  Pick up the Combat Reflexes feat to get multiple attacks of opportunities with your reach weapons to punish anyone trying to get by you and attempt to attack your party's soft and squishy mages!";
+                }
+            }
+        }
+        
+        else if (totalStats.skills < currentNeeds.skills){
+            //Disable Device Check
+            if (_.includes(party, 'Rogue') || _.includes(party, 'Alchemist') || _.includes(party, 'Investigator')){
+                suggestedReason = "Your party has someone who can disable devices but not someone who can track effectively.  \n\n";
+                if (_.includes(party, 'Druid')){
+                    //Ranger
+                    suggestedClass = "Slayer";
+                    suggestedReason += "Since your party already contains a Druid, you don't need the spell lists Rangers and Hunters bring.  Slayers have 6+INT Mod skill ranks per level and all the important class skills you're going to need for stealthing, ambushing, tracking, and surviving out in the wilderness.   Not to mention you are a full BAB, sneak attacking, d10 HD having, medium armor wearing KILLER!  What's not to like?!";
+                }
+                else{
+                    //Hunter
+                    suggestedClass = "Hunter";
+                    suggestedReason += "Since your team lacks the spell list of a Druid, it doesn't hurt to be both a 6+INT Mod skill ranks per level, important stealthing, ambushing, tracking, surviving in the wilderness class skill having, Druid spell list casting, Animal Companion possessing Hunter!  You're going to fill out more for your party than just the wilderness skills and they will be grateful for it!";
+                }
+            }
+            else{
+                suggestedReason = "Your party needs someone who can disable devices at an effecient level if you want to survive passed traps.  \n\n";
+                //Rogue
+                suggestedClass = "Rogue";
+                suggestedReason += "Rogues are the iconic and much needed skill monkey of almost every fantasy game!  Keep your skills high, if you are being hit by traps you cannot see or disarm with your rolls, pick up Rogue talents that improve your skills.  Your sneak attacks are FANTASTIC damage but almost everyone can produce damage, most likely you'll be the only one who can scout ahead, do stealth missions, and handle traps for the party.  So I repeat myself, keep your skills high!";
+            }
+        }
+        
+        else if (totalStats.face < currentNeeds.face){
+            suggestedReason = "Your current party has a somewhat weak face, it can use some assistance from a larger range of social or knowledge skills.  \n\n";
+            //Has all face skills
+            /*if (_.includes(party, 'Bard') || _.includes(party, 'Cavalier') || _.includes(party, 'Inquisitor') || _.includes(party, 'Rogue') || _.includes(party, 'Investigator') || _.includes(party, 'Skald') || _.includes(party, 'Swashbuckler') || _.includes(party, 'Vigilante')){
+                
+            }
+            //Librarians that aren't counted yet.
+            else*/ if (_.includes(party, 'Summoner') || _.includes(party, 'Wizard') || _.includes(party, 'Arcanist')){
+                suggestedClass = "Inquisitor";//Inquisitor?
+                suggestedReason += "You have an arcane caster supplying all the knowledge checks that you need, so a Bard would overlap too much with them because Bards provide arcane casting and knowledges.  Inquisitor on the other hand brings all the social skills you need to be a party face and a wide array of class abilities that your party can benefit from, with a divine spell list to boot!";
+            }
+            //Bluffers -- Maybe remove Sorc
+            else if (_.includes(party, 'Gunslinger') || _.includes(party, 'Slayer')){
+                suggestedClass = "Cleric";//Diplomas?
+                suggestedReason += "You have someone on your party that can handle being the bad cop on your party, but you can still use someone who can be the good cop and provide more knowledge skills.  Cleric definitely fits the bill bringing both of those and one of the most powerful set of spells in Pathfinder along side Channel Energy to heal and help the party in many more ways than just being a face!";
+            }
+            //Diplomacy
+            else if (_.includes(party, 'Cleric') || _.includes(party, 'Oracle') || _.includes(party, 'Paladin') || _.includes(party, 'Warpriest')){
+                //Use Bluffers?
+                suggestedClass = "Gunsinger";
+                suggestedReason += "You have someone in your party that is sweet and polite for social situations, but you don't have someone who is willing to tell it like it is or even lie to get the party through tough negotiations.  The rough and tumble Gunslinger isn't afraid to bring those social skills to the table along with high Charisma for his Grit and great ranged damage from his guns!";
+            }
+            else{
+                suggestedClass = "Bard";
+                suggestedReason += "Your party is far too weak in knowledge checks AND social skills.  They need a dedicated face and a Bard makes one of the best party leaders in the game!";
+            }
+            
+        }
+        
+        else if (totalStats.arcane < currentNeeds.arcane){
+            if (_.includes(party, 'Wizard')){
+                //Witch
+                suggestedClass = "Witch";
+                suggestedReason = "Your party needs more arcane magic and you already have a Wizard.  The best move is to bring the Witch spell list and hexes to expand further beyond what a Wizard provides to the party.  Unless you feel like collaborating with the Wizard as another Wizard and select different schools of magic to specialize in...";
+            }
+            else{
+                //Wizard
+                suggestedClass = "Wizard";
+                suggestedReason = "Your party needs more arcane magic and nothing beats the Wizard in arcane!  Nothing!!";
+            }
+            
+        }
+        
+        else if (totalStats.divine < currentNeeds.divine){
+            if (_.includes(party, 'Cleric')){
+                //Druid
+                suggestedClass = "Druid";
+                suggestedReason = "Your party needs more divine magic and you already have a Cleric.  The best move is to bring the Druid spell list to expand further beyond what a Cleric provides to the party.";
+            }
+            else{
+                //Cleric
+                suggestedClass = "Cleric";
+                suggestedReason = "Your party needs more divine magic and nothing beats the Cleric in divine!  Nothing!!";
+            }
+        }
+        
+        else{
+            //DONE
+            suggestedClass = "ANYTHING!!!";
+            suggestedReason = "Seriously, outside of maybe some real niche encounters... there shouldn't be anything this party cannot handle!  Be whatever you want to be, heck go for a silly build this time around for some laughs, your party's lives should not be at risk in this set up... Or ask your GM what niche encounters the party might encounter and specifically pick something to counter that (Ranger with Favored Enemy of an Enemy the GM tells you there will be a lot of, or Paladin if the GM tells you there is a lot of Undead, etc.).";
+        }
+        
+        return { suggestedClass: classSuggest, suggestedReason: reasonSuggest};
     }
     
     $scope.createPartyMember = createPartyMember;
