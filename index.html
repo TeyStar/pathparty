@@ -46,7 +46,7 @@
                                 <option value="15">Magus</option>
                                 <option value="16">Oracle</option>
                                 <option value="17">Summoner</option>
-                                <option value="18">Vagilante</option>
+                                <option value="18">Vigilante</option>
                                 <option value="19">Witch</option>
                             </optgroup>
                             <optgroup label="HYBRID CLASSES">
@@ -69,9 +69,9 @@
             
             <div class="column" id="results">
                 <h3>You Should Roll:</h3>
-                <p>{{suggest.classSuggest}}</p>
-                <h4>...and here's why:</h4>
-                <p>{{suggest.reasonSuggest}}</p>
+                <p id="answer">{{suggest.classSuggest}}</p>
+                <h4>. . . and here's why:</h4>
+                <p id="answer">{{suggest.reasonSuggest}}</p>
             </div>
             
             <div class="column" id="partylist">
@@ -81,14 +81,15 @@
                          {{partyMember.name}}
                      </li>
                 </ul>
-                <div class="ui submit button">This Is My Current Party</div>
+                <div ng-click="party = []" class="ui submit button">Clear Party</div>
             </div>
         </div>
     </div>
     
     <p id="disclaimer">
         'What Should I Roll?' is not 100% accurate but will almost always give
-        a good class suggestion.  Its accuracy diminishes when players use 3rd
+        a good class suggestion.  Do not use it to create an entire party without expecting 
+        some wonky results.  Its accuracy diminishes when players use 3rd
         party materials or class archetypes.  Think about these variables and try
         to find an archetype within the suggested class for best results in these
         circumstances.  Always try to make something that will be fun to play!
