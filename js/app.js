@@ -813,14 +813,124 @@ angular.module('wsir', [
             }
         }
         
-       // else if (party.length){
-            
-        //}
+       else if (party.length < 7){
+           suggestedReason = "The current party is actually well rounded in every area for an adventure built for its current party size.  \n\n";
+           
+           if (!_.includes(shortClasses, 'Rogue') && !_.includes(shortClasses, 'Alchemist') && !_.includes(shortClasses, 'Investigator')){
+               suggestedReason += "Your party still lacks a trapfinder.  If the adventure will have traps in it, you will want to bring someone who can handle finding and disarming them.  \n\n";
+               if (totalStats.frontline < totalStats.arcane){
+                    suggestedClass = "Rogue";
+                    suggestedReason += "Rogues are the iconic and much needed skill monkey of almost every fantasy game!  Keep your skills high, if you are being hit by traps you cannot see or disarm with your rolls, pick up Rogue talents that improve your skills.  Your sneak attacks are FANTASTIC damage but almost everyone can produce damage, most likely you'll be the only one who can scout ahead, do stealth missions, and handle traps for the party.  So I repeat myself, keep your skills high!";
+               }
+               else if (totalStats.arcane < totalStats.frontline){
+                   suggestedClass = "Alchemist";
+                    suggestedReason += "While your arcane and divine casting are both good, why not add more arcane with Alchemist potions to the party since you have a strong frontline already?  " +
+                    "Alchemist brings many skills and is able to find and disable traps with his Perception and Disable Device class skills.  They also 'cast' up to 6th level extract formulae and throw bombs that deal AoE damage that can be altered with Discoveries to deal AoE debuffs and other effects which can stand in for some moments that need a spell casted.  So they can certainly help the Arcane department of this party!";
+               }
+               else {
+                    suggestedClass = "Investigator";
+                    suggestedReason += "Your party has everything, why not add onto all these roles?  Investigator can be the face/library/skill monkey/trapfinder/potion maker all in one!  " +
+                    "Pick up Expanded Inspiration and Underworld Inspiration, you can drop as many inspirations as you want in Disable Device and Perception without costing a use of inspiration, pick up Amazing Inspiration at level 7 and you are rolling d20+WIS/DEX+d8+INT+half your level for those two rolls!";
+               }
+           }
+           
+           else if (totalStats.frontline <= totalStats.arcane && totalStats.frontline <= totalStats.divine){
+                if ( !_.includes(shortClasses, 'Fighter') && !_.includes(shortClasses, 'Paladin') && !_.includes(shortClasses, 'Cavalier')){
+                    suggestedReason += "While you have a solid frontline, it doesn't hurt to at least get one character that has both heavy armor and a d10 hit die in the party.  \n\n";
+                    suggestedClass = "Fighter";//Fighter
+                    suggestedReason += "Fighter's access to heavy armor training, which gives their DEX bonus while wearing heavy armor, and polearms for long ranged attacks of opportunity makes them a great choice!  Pick up the Combat Reflexes feat to get multiple attacks of opportunities with your reach weapons to punish anyone trying to get by you and attempt to attack your party's soft and squishy mages!";
+               }
+               else{
+                    suggestedReason += "You have a solid frontline and a dedicated Defender with both heavy armor and a d10 hit die on the party but it wouldn't hurt to add some more Strikers to help damage.  \n\n";
+                    
+                    if (!_.includes(shortClasses, 'Gunslinger')){
+                        suggestedClass = "Gunslinger";
+                        suggestedReason += "A Gunslinger has full BAB, hits on Touch AC, and produces high physical damage through guns.  They are a source of damage that you can rely on because there isn't many enemies in Pathfinder they cannot hit and damage.";
+                    }
+                    else if (!_.includes(shortClasses, 'Barbarian') && !_.includes(shortClasses, 'Skald') && !_.includes(shortClasses, 'Bloodrager')){
+                        suggestedClass = "Barbarian";
+                        suggestedReason += "Looks like you also have some ranged damage and no one with Rage Powers in the party.  A Barbarian can extend the range of tools the frontline has available to them with their Rage Powers.  More options never hurt and you never know when you need that ONE THING when you're in a pinch!";
+                    }
+                    else if (!_.includes(shortClasses, 'Monk')){
+                        suggestedClass = "Monk";
+                        suggestedReason += "Looks like you also have some ranged damage and no one with Ki in the party.  A Monk can extend the range of tools the frontline has available to them with their Ki Abilities.  More options never hurt and you never know when you need that ONE THING when you're in a pinch!";
+                    }
+                    else{
+                        suggestedClass = "Error: ts.fl<7";
+                        suggestedReason = "This is an error, please send the party that caused this and the error code above this message to the developer.";
+                    }
+               }
+           }
+           
+           else if (!_.includes(shortClasses, 'Bard')){
+                suggestedClass = "Bard";
+                suggestedReason += "Since the party is so rounded, why not add a Bard in there for their party buffs and make them better?";
+           }
+           else if (!_.includes(shortClasses, 'Skald')){
+               suggestedClass = "Skald";
+               suggestedReason += "The party is well rounded and is even being enhanced by a Bard's buffs!  Throw your buffs on top to boost the party even more because Inspire Courage and Inspire Rage songs stack with each other!";
+           }
+           
+           else if (totalStats.arcane <= totalStats.frontline && totalStats.arcane <= totalStats.divine){
+               suggestedReason += "Looks like the party has plenty of spells at their disposal but it wouldn't hurt to add more Arcane to the party.  \n\n";
+               
+               if (!_.includes(shortClasses, 'Sorcerer') || !_.includes(shortClasses, 'Arcanist')){
+                    suggestedClass = "Sorcerer";
+                    suggestedReason += "Since your party already has a large enough range of Arcane spells to survive the adventure and you are lacking a spontaneous Arcane caster, a Sorcerer would provide that kick of powerful but limited spells the party needs!";
+               }
+               else if (!_.includes(shortClasses, 'Gunsliner') || !_.includes(shortClasses, 'Magus') || !_.includes(shortClasses, 'Ranger')){
+                    suggestedClass = "Magus as Myrmidarch archetype";
+                    suggestedReason += "Your party has no ranged attackers, the Myrmidarch uses ranged weapons to shoot ammo that gave been granted touch attacks to them.  Shoot some arrows with Shocking Grasps for amazing ranged damage!  The archetype also comes with armor training allowing you to have high DEX in heavy armor, meaning you can be both tanky and a great shot... often a compromise other archers are forced to make.";
+               }
+               else if (!_.includes(shortClasses, 'Barbarian') || !_.includes(shortClasses, 'Bloodrager')){
+                    suggestedClass = "Bloodrager as Metamagic Rager archetype";
+                    suggestedReason += "Your party doesn't have a Barbarian and wouldn't suffer from getting a little bit more Arcane magic in.  A Metamagic Rager allows Meta-Magic Feats to be a possibility for the Bloodrager because it is using Bloodrage rounds instead of higher level spell slots to cast.  It is probably the only viable 4th level caster Meta-Magic strategy in Pathfinder!";
+               }
+               else{
+                    suggestedClass = "Error: ts.ar<7";
+                    suggestedReason = "This is an error, please send the party that caused this and the error code above this message to the developer.";
+               }
+           }
+           
+           else if (totalStats.divine <= totalStats.frontline && totalStats.divine <= totalStats.arcane){
+               suggestedReason += "Looks like the party has plenty of spells at their disposal but it wouldn't hurt to add more Divine to the party.  \n\n";
+               
+               if (!_.includes(shortClasses, 'Rogue') || !_.includes(shortClasses, 'Slayer') || !_.includes(shortClasses, 'Warpriest')){
+                    suggestedClass = "Warpriest as Cult Leader archetype";
+                    suggestedReason += "The party is lacking someone with sneak attacks.  The Cult Leader brings kind of a Divine version of the Arcane Trickster class, you are a Rogue with Cleric spells!  Take a trait for Disable Divice for trap disabling if you want to replace the need for a Rogue entirely.";
+               }
+               else if (!_.includes(shortClasses, 'Monk') || !_.includes(shortClasses, 'Warpriest')){
+                    suggestedClass = "Warpriest as Sacred Fist archetype";
+                    suggestedReason += "The party is lacking someone with Ki Powers.  The Sacred Fist brings a mix of Monk and Cleric together, where you are awesome in martial arts AND divine spells!";
+               }
+               else if (!_.includes(shortClasses, 'Gunsliner') || !_.includes(shortClasses, 'Paladin') || !_.includes(shortClasses, 'Ranger')){
+                    suggestedClass = "Paladin as Divine Hunter archetype";
+                    suggestedReason += "The party lacks a ranged attacker.  Divine Hunter is essentually a long ranged Paladin, they can still provide support from their new location in the back with all their Paladin goodness.  They even get ranged Lay on Hands!";
+               }
+               else if (!_.includes(shortClasses, 'Inquisitor')){
+                    suggestedClass = "Inquisitor as Spellbreaker archetype";
+                    suggestedReason += "This is a very specific role but might as well cover all bases since your party is solid as it is, correct?  Spellbreakers are mage mashers, they are resistant to selected arcane schools, get to reroll most will saves, and make concentration checks to cast spells harder for the enemy to complete.  Spellbreaker's Foil Casting ability is also usable with ranged weapons, just prepare a ranged attack for when someone starts casting and disrupt concentration from a distance!";
+               }
+               else if (!_.includes(shortClasses, 'Paladin')){
+                    suggestedClass = "Cleric as Undead Lord archetype";
+                    suggestedReason += "The party doesn't have a Paladin to ruin your fun, but still check with the others to see if playing with Necromancy offends their characters.  The Undead Lord brings several undead pets to fight in the frontline, while having the awesome Cleric spell list and support potential.  They essentually enhance everything the party already has!";
+               }
+               else {
+                    suggestedClass = "Error: ts.di<7";
+                    suggestedReason = "This is an error, please send the party that caused this and the error code above this message to the developer.";
+               }
+           }
+           
+           else {
+                suggestedClass = "Error: ts.<7";
+                suggestedReason = "This is an error, please send the party that caused this and the error code above this message to the developer.";
+           }
+        }
         
         else{
             //DONE
             suggestedClass = "ANYTHING!!!";
-            suggestedReason = "Seriously, outside of maybe some real niche encounters... there shouldn't be anything this party cannot handle!  Be whatever you want to be, heck go for a silly build this time around for some laughs, your party's lives should not be at risk in this set up... Or ask your GM what niche encounters the party might encounter and specifically pick something to counter that (Ranger with Favored Enemy of an Enemy the GM tells you there will be a lot of, or Paladin if the GM tells you there is a lot of Undead, etc.).";
+            suggestedReason = "Your party is so huge and has some of everything.  I doubt you will find many encounters that will be a problem you cannot solve.";
         }
         
         $scope.suggest.classSuggest = suggestedClass;
