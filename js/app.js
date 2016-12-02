@@ -53,8 +53,8 @@ angular.module('wsir', [
         {id: 15, name: 'Magus', frontline: 1, fortitude: 1, reflex: 0, will: 1,
         skills: 0, face: 0, arcane: 1, divine: 0},
         
-        {id: 16, name: 'Oracle', frontline: 1, fortitude: 0, reflex: 0, will: 1,
-        skills: 1, face: 1, arcane: 0, divine: 1},
+        {id: 16, name: 'Oracle', frontline: 0, fortitude: 0, reflex: 0, will: 1,
+        skills: 0.5, face: 1, arcane: 0, divine: 2},
         
         {id: 17, name: 'Summoner', frontline: 1, fortitude: 0, reflex: 0, will: 1,
         skills: 0, face: 1, arcane: 1, divine: 0},
@@ -262,7 +262,7 @@ angular.module('wsir', [
                 if (totalStats.reflex < currentNeeds.reflex){
                     suggestedClass = "Ranger";
                     suggestedReason = "The party needs a frontliner, more characters with reflex saves, and is lacking " +
-                    "in the skills department.  As a Ranger, you can do very well in the frontline, bring a tanky pet out there with you " +
+                    "in the skills department.  As a Ranger you have a meaty d10 hit die thus can do very well in the frontline, bring a tanky pet out there with you " +
                     "have solid reflex saves, and help the party with Perception, Stealth, Tracking, and several Knowledge checks!  All in one package!";
                 }
                 else if(totalStats.fortitude < currentNeeds.fortitude){
