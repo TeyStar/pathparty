@@ -101,6 +101,12 @@ angular.module('wsir', [
     
     $scope.suggest = [{classSuggest: '', reasonSuggest: ''}];
     
+    $scope.remove = function($index, party) { 
+        party.splice($index, 1);
+        
+        return giveSuggestion(findPartyStats(party), party);
+    };
+    
     //#################
     //#Party Creation#
     //#################
@@ -746,7 +752,7 @@ angular.module('wsir', [
                 else{
                     //Hunter
                     suggestedClass = "Hunter";
-                    suggestedReason += "Since your team lacks the spell list of a Druid, it doesn't hurt to be both a 6+INT Mod skill ranks per level, important stealthing, ambushing, tracking, surviving in the wilderness class skill having, Druid spell list casting, Animal Companion possessing Hunter!  You're going to fill out more for your party than just the wilderness skills and they will be grateful for it!";
+                    suggestedReason += "Since your team lacks the spell list of a Druid, it doesn't hurt to be a 6+INT Mod skill ranks per level, important stealthing, ambushing, tracking, surviving in the wilderness class skill having, Druid spell list casting, Animal Companion possessing Hunter!  You're going to fill out more for your party than just the wilderness skills and they will be grateful for it!";
                 }
             }
             else{
