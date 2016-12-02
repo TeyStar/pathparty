@@ -35,4 +35,9 @@ a{
 
 #answer{
     color: #AA00AA;
+    font-weight: bold;
+}
+
+li {
+    font-weight: bold;
 }
