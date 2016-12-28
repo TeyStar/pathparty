@@ -27,7 +27,7 @@ angular.module('wsir')
         skills: 0, face: 0, arcane: 0, divine: 0},
         
         {id: 8, name: 'Paladin', formName: 'Paladin/Antipaladin',  classType: 'Core', frontline: 1, fortitude: 1, reflex: 0, will: 1,
-        skills: 0, face: 0, arcane: 0, divine: 1},
+        skills: 0, face: 1, arcane: 0, divine: 1},
         
         {id: 9, name: 'Ranger', frontline: 1, fortitude: 1, reflex: 1, will: 0,
         skills: 1, face: 0, arcane: 0, divine: 0},

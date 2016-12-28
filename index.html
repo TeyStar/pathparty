@@ -10,8 +10,8 @@
     <div class = "ui stackable relaxed centered grid">
         <div class = "row"></div>
             <div class = "four column row">
-                <div class = "large screen only one wide column"></div>
-                <div class = "eight wide column">
+                <div class = "one wide computer only column"></div>
+                <div class = "sixteen wide tablet mobile eight wide computer column">
                     <div class = "ui segment">
                         <h1 class="ui left floated block icon header">
                             <img class="ui small circular image" src="assets/die.png">
@@ -19,9 +19,10 @@
                                 What Should I Roll?
                             </div>
                         </h1>
-                        <p class="sub header">'What Should I Roll?' is a website designed by <a>TeyStar</a> to quickly give you a class idea for your next character, built around what the current party already contains.</p>
-                        <p>Set the drop down menu to a class of a party member, then click the "Add to Party" button to add that member to your party.</p>
+                        <p class="sub header">'What Should I Roll?' is a website designed by <a href="mailto:teyandee.m@gmail.com?Subject=WSIR%20Feedback" target="_top">Robert "TeyStar" Mulcahy</a> to quickly give you a class idea for your next character, built around what the current party already contains.</p>
+                        <p>Set the drop down menu to a class of a party member, then click the <i class="add square icon"></i>button to add that member to your party.</p>
                         <P>Fill it with all of your current party members to recieve a class suggestion to best help the party.</P>
+                        <p>These are only SUGGESTIONS!  They are not the Min/Maxed best choice options for Pathfinder veterans.  If vets want to get the most out of this, read the description of why the class was suggested and build a character who can fill that role while being a GOD!</p>
                         <p>This site is to suggest a newcoming party member their class, if you use it to create the entire party the results should stay accurate but maybe a bit wonky.</p>
                         <p>As the party size increases so does the difficulty of the adventure expected by this site.  This will make different party needs take precedence over what might of been suggested for a smaller party.</p>
                         <p>If someone is using a 3rd party class or an archetype that greatly alters their class' role, then select the class that closest resembles their character build.</p>
@@ -31,7 +32,7 @@
                     </div>
                 </div>
 
-                <div class="four wide column">
+                <div class="sixteen wide tablet mobile four wide computer column">
                     <div class = "ui segment">
                         <form class="ui form" ng-submit="createPartyMember(playerClassId, playerClasses, party)">
                             <div class="field">
@@ -74,7 +75,7 @@
                                         <option value="29">Warpriest</option>
                                     </optgroup>
                                 </select>
-                                <button class="ui right floated submit button" >Add to Party</button>
+                                <button class="ui right floated positive icon button" ><i class="add square icon"></i></button>
                             </div>
                         </form>
                     </div>
@@ -91,10 +92,10 @@
                         </div>
                     </div>
                 </div>
-                <div class = "large screen only one wide column"></div>
+                <div class = "one wide computer only column"></div>
             </div>
 
-            <div class="twelve wide column" id="results">
+            <div class="sixteen wide tablet mobile twelve wide computer column" id="results">
                 <div class="ui segment">
                     <div class ="ui left floated block header">
                         <h3>You Should Roll:</h3>

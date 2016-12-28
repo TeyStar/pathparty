@@ -73,7 +73,7 @@ angular.module('wsir', [
         
         var currentNeeds = needsMap[0];
         
-        if (party.length >= 5){
+        if (party.length >= 4){
             currentNeeds = needsMap[1];
         }
         else if (party.length == 3){
@@ -623,6 +623,20 @@ angular.module('wsir', [
                         "frontline!  Build your Eidolon to have as many attacks of opprotunity as possible and give him long reach " +
                         "with solid tripping ability and nothing will be able to safely move around your summons without being tripped and severely punished!  " +
                         "Pick up some traits that will give you Bluff and Diplomacy and you're set to be a makeshift party face since your casting stat is Charisma after all.  You also get every Knowledge check and Linguistics, learn about the cultures, current events, and the languages of the area before you start talking and you should be fine as the party leader.";
+                    }
+                }
+                else{
+                    if(!_.includes(shortClasses, 'Barbarian')){
+                        suggestedClass = "Barbarian";
+                        suggestedReason += "A Barbarian has the biggest hit die in the game with a d12 and can only wear medium armor, but that's okay because you already have someone who handles that!  You're bringing their full BAB combined with their rage, you WILL hit more often than miss and when a Barbarian hits, they hit hard!  You also bring all sorts of rage powers to the team which can expand the amount of tools they have to resolve various troubles.";
+                    }
+                    else if(!_.includes(shortClasses, 'Monk')){
+                        suggestedClass = "Monk";
+                        suggestedReason += "A Monk brings more combat options to the party.  They gain Maneuver Training with plenty of unique monkly weapons that give them MORE bonuses to combat maneuvers.  With Flurry of Blows, sure you can attack more, but you can also Disarm, Sunder, and Trip in place of those attacks!  Yes, all in one turn!  Don't forget about their Stunning Fist ability or Ki abilities either.  You can definitely provide quite a bit of mid combat utility with all these options.";
+                    }
+                    else{
+                        suggestedClass = "Error: ts.fl4";
+                        suggestedReason = "This is an error, please send the party that caused this and the error code above this message to the developer.";
                     }
                 }
             }
