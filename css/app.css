@@ -1,41 +1,19 @@
+
 body{
-    background-color: #247BA0;
-    color: #FF1654;
+    background-color: lightgray;
 }
 
-html, body, h1, h2, h3, h4, h5, p, .ui { 
-    font-family: 'Julius Sans One', sans-serif !important; 
-}
-
-#pmcselector{
-    background-color: #70C1B3 !important;
-}
-#results{
-    background-color: #B2DBBF !important;
-}
-#partylist{
-    background-color: #F3FFBD !important;
+h1, h2, h3, h4{
+    color : orange !important;
 }
 
 .ui.icon.header{
     display: block;
 }
 
-.ui.header, .ui.header .sub.header{
-    color:white;
-}
-
-#disclaimer{
-    color: white;
-}
-
 a{
-    color: #00FFFF !important;
-}
-
-#answer{
-    color: #AA00AA;
-    font-weight: bold;
+    color: lightgreen !important;
+    font-weight: bold !important;
 }
 
 li {

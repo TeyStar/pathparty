@@ -1,3 +1,2 @@
-module.exports = {
-  'now': require('./now')
-};
+var convert = require('./convert');
+module.exports = convert(require('../date'));

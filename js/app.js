@@ -2,100 +2,9 @@ angular.module('wsir', [
     ])
     
 
-.controller('MainCtrl', function($scope){
-    $scope.playerClasses = [
-        {id: 0, name: 'Fighter', frontline: 2, fortitude: 1, reflex: 0, will: 0,
-        skills: 0, face: 0, arcane: 0, divine: 0},
-        
-        {id: 1, name: 'Cleric',  frontline: 0, fortitude: 1, reflex: 0, will: 1,
-        skills: 0, face: 1, arcane: 0, divine: 2},
-        
-        {id: 2, name: 'Rogue', frontline: 0, fortitude: 0, reflex: 1, will: 0,
-        skills: 2, face: 2, arcane: 0, divine: 0},
-        
-        {id: 3, name: 'Wizard', frontline: 0, fortitude: 0, reflex: 0, will: 1,
-        skills: 0, face: 1, arcane: 2, divine: 0},
-        
-        {id: 4, name: 'Barbarian', frontline: 1, fortitude: 1, reflex: 0, will: 0,
-        skills: 1, face: 0, arcane: 0, divine: 0},
-        
-        {id: 5, name: 'Bard', frontline: 0, fortitude: 0, reflex: 1, will: 1,
-        skills: 1, face: 2, arcane: 1, divine: 0},
-        
-        {id: 6, name: 'Druid', frontline: 1, fortitude: 1, reflex: 0, will: 1,
-        skills: 0, face: 0, arcane: 0, divine: 1},
-        
-        {id: 7, name: 'Monk', frontline: 1, fortitude: 1, reflex: 1, will: 1,
-        skills: 0, face: 0, arcane: 0, divine: 0},
-        
-        {id: 8, name: 'Paladin', frontline: 1, fortitude: 1, reflex: 0, will: 1,
-        skills: 0, face: 0, arcane: 0, divine: 1},
-        
-        {id: 9, name: 'Ranger', frontline: 1, fortitude: 1, reflex: 1, will: 0,
-        skills: 1, face: 0, arcane: 0, divine: 0},
-        
-        {id: 10, name: 'Sorcerer', frontline: 0, fortitude: 0, reflex: 0, will: 1,
-        skills: 0, face: 0, arcane: 2, divine: 0},
-        
-        //*****BASECLASSES*****//*****BASECLASSES*****//*****BASECLASSES*****
-        {id: 11, name: 'Alchemist', frontline: 0, fortitude: 1, reflex: 1, will: 0,
-        skills: 1, face: 0, arcane: 1, divine: 0.5},
-        
-        {id: 12, name: 'Cavalier', frontline: 1, fortitude: 1, reflex: 0, will: 0,
-        skills: 0, face: 2, arcane: 0, divine: 0},
-        
-        {id: 13, name: 'Gunslinger', frontline: 1, fortitude: 1, reflex: 1, will: 0,
-        skills: 1, face: 0, arcane: 0, divine: 0},
-        
-        {id: 14, name: 'Inquisitor', frontline: 1, fortitude: 1, reflex: 0, will: 1,
-        skills: 1, face: 2, arcane: 0, divine: 1},
-        
-        {id: 15, name: 'Magus', frontline: 1, fortitude: 1, reflex: 0, will: 1,
-        skills: 0, face: 0, arcane: 1, divine: 0},
-        
-        {id: 16, name: 'Oracle', frontline: 0, fortitude: 0, reflex: 0, will: 1,
-        skills: 0.5, face: 1, arcane: 0, divine: 2},
-        
-        {id: 17, name: 'Summoner', frontline: 1, fortitude: 0, reflex: 0, will: 1,
-        skills: 0, face: 1, arcane: 1, divine: 0},
-        
-        {id: 18, name: 'Vigilante', frontline: 1, fortitude: 0, reflex: 1, will: 1,
-        skills: 1, face: 2, arcane: 0, divine: 0},
-        
-        {id: 19, name: 'Witch', frontline: 0, fortitude: 0, reflex: 0, will: 1,
-        skills: 0, face: 0, arcane: 2, divine: 0},
-        
-        //*****HYBRIDCLASSES*****//*****HYBRIDCLASSES*****//*****HYBRIDCLASSES*****
-        {id: 20, name: 'Arcanist', frontline: 0, fortitude: 0, reflex: 0, will: 1,
-        skills: 0, face: 1, arcane: 2, divine: 0},
-        
-        {id: 21, name: 'Bloodrager', frontline: 1, fortitude: 1, reflex: 0, will: 0,
-        skills: 0, face: 0, arcane: 1, divine: 0},
-        
-        {id: 22, name: 'Brawler', frontline: 1, fortitude: 1, reflex: 1, will: 0,
-        skills: 0, face: 0, arcane: 0, divine: 0},
-        
-        {id: 23, name: 'Hunter', frontline: 1, fortitude: 1, reflex: 1, will: 0,
-        skills: 1, face: 0, arcane: 0, divine: 1},
-        
-        {id: 24, name: 'Investigator', frontline: 0, fortitude: 0, reflex: 1, will: 1,
-        skills: 2, face: 2, arcane: 1, divine: 0.5},
-        
-        {id: 25, name: 'Shaman', frontline: 0, fortitude: 0, reflex: 0, will: 1,
-        skills: 0, face: 1, arcane: 0.5, divine: 1},
-        
-        {id: 26, name: 'Skald', frontline: 1, fortitude: 1, reflex: 0, will: 1,
-        skills: 0, face: 2, arcane: 1, divine: 0},
-        
-        {id: 27, name: 'Slayer', frontline: 1, fortitude: 1, reflex: 1, will: 0,
-        skills: 1, face: 0, arcane: 0, divine: 0},
-        
-        {id: 28, name: 'Swashbuckler', frontline: 1, fortitude: 0, reflex: 1, will: 0,
-        skills: 0, face: 2, arcane: 0, divine: 0},
-        
-        {id: 29, name: 'Warpriest', frontline: 1, fortitude: 1, reflex: 0, will: 1,
-        skills: 0, face: 1, arcane: 0, divine: 1}
-    ];
+.controller('MainCtrl', function($scope, ClassService){
+    $scope.ClassService = ClassService;
+    $scope.playerClasses = ClassService.list();
     
     $scope.party = [];
     
@@ -164,7 +73,7 @@ angular.module('wsir', [
         
         var currentNeeds = needsMap[0];
         
-        if (party.length >= 5){
+        if (party.length >= 4){
             currentNeeds = needsMap[1];
         }
         else if (party.length == 3){
@@ -716,6 +625,20 @@ angular.module('wsir', [
                         "Pick up some traits that will give you Bluff and Diplomacy and you're set to be a makeshift party face since your casting stat is Charisma after all.  You also get every Knowledge check and Linguistics, learn about the cultures, current events, and the languages of the area before you start talking and you should be fine as the party leader.";
                     }
                 }
+                else{
+                    if(!_.includes(shortClasses, 'Barbarian')){
+                        suggestedClass = "Barbarian";
+                        suggestedReason += "A Barbarian has the biggest hit die in the game with a d12 and can only wear medium armor, but that's okay because you already have someone who handles that!  You're bringing their full BAB combined with their rage, you WILL hit more often than miss and when a Barbarian hits, they hit hard!  You also bring all sorts of rage powers to the team which can expand the amount of tools they have to resolve various troubles.";
+                    }
+                    else if(!_.includes(shortClasses, 'Monk')){
+                        suggestedClass = "Monk";
+                        suggestedReason += "A Monk brings more combat options to the party.  They gain Maneuver Training with plenty of unique monkly weapons that give them MORE bonuses to combat maneuvers.  With Flurry of Blows, sure you can attack more, but you can also Disarm, Sunder, and Trip in place of those attacks!  Yes, all in one turn!  Don't forget about their Stunning Fist ability or Ki abilities either.  You can definitely provide quite a bit of mid combat utility with all these options.";
+                    }
+                    else{
+                        suggestedClass = "Error: ts.fl4";
+                        suggestedReason = "This is an error, please send the party that caused this and the error code above this message to the developer.";
+                    }
+                }
             }
             else{
                 //Defenders
@@ -884,7 +807,7 @@ angular.module('wsir', [
                     suggestedClass = "Sorcerer";
                     suggestedReason += "Since your party already has a large enough range of Arcane spells to survive the adventure and you are lacking a spontaneous Arcane caster, a Sorcerer would provide that kick of powerful but limited spells the party needs!";
                }
-               else if (!_.includes(shortClasses, 'Gunsliner') || !_.includes(shortClasses, 'Magus') || !_.includes(shortClasses, 'Ranger')){
+               else if (!_.includes(shortClasses, 'Gunslinger') || !_.includes(shortClasses, 'Magus') || !_.includes(shortClasses, 'Ranger')){
                     suggestedClass = "Magus as Myrmidarch archetype";
                     suggestedReason += "Your party has no ranged attackers, the Myrmidarch uses ranged weapons to shoot ammo that gave been granted touch attacks to them.  Shoot some arrows with Shocking Grasps for amazing ranged damage!  The archetype also comes with armor training allowing you to have high DEX in heavy armor, meaning you can be both tanky and a great shot... often a compromise other archers are forced to make.";
                }
@@ -900,7 +823,7 @@ angular.module('wsir', [
            
            else if (totalStats.divine <= totalStats.frontline && totalStats.divine <= totalStats.arcane){
                suggestedReason += "Looks like the party has plenty of spells at their disposal but it wouldn't hurt to add more Divine to the party.  \n\n";
-               
+
                if (!_.includes(shortClasses, 'Rogue') || !_.includes(shortClasses, 'Slayer') || !_.includes(shortClasses, 'Warpriest')){
                     suggestedClass = "Warpriest as Cult Leader archetype";
                     suggestedReason += "The party is lacking someone with sneak attacks.  The Cult Leader brings kind of a Divine version of the Arcane Trickster class, you are a Rogue with Cleric spells!  Take a trait for Disable Divice for trap disabling if you want to replace the need for a Rogue entirely.";
@@ -909,7 +832,7 @@ angular.module('wsir', [
                     suggestedClass = "Warpriest as Sacred Fist archetype";
                     suggestedReason += "The party is lacking someone with Ki Powers.  The Sacred Fist brings a mix of Monk and Cleric together, where you are awesome in martial arts AND divine spells!";
                }
-               else if (!_.includes(shortClasses, 'Gunsliner') || !_.includes(shortClasses, 'Paladin') || !_.includes(shortClasses, 'Ranger')){
+               else if (!_.includes(shortClasses, 'Gunslinger') || !_.includes(shortClasses, 'Paladin') || !_.includes(shortClasses, 'Ranger')){
                     suggestedClass = "Paladin as Divine Hunter archetype";
                     suggestedReason += "The party lacks a ranged attacker.  Divine Hunter is essentually a long ranged Paladin, they can still provide support from their new location in the back with all their Paladin goodness.  They even get ranged Lay on Hands!";
                }
@@ -931,6 +854,7 @@ angular.module('wsir', [
                 suggestedClass = "Error: ts.<7";
                 suggestedReason = "This is an error, please send the party that caused this and the error code above this message to the developer.";
            }
+
         }
         
         else{
